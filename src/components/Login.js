@@ -52,27 +52,29 @@ const Login = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">Email Address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-      <label htmlFor="pass">Password</label>
-      <input
-        id="pass"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        value={formik.values.password}
-      />
-      {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-      <button type="submit">Submit</button>
-    </form>
+    <div className="Inicio">
+      <form onSubmit={formik.handleSubmit}>
+        <label htmlFor="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+        <label htmlFor="pass">Password</label>
+        <input
+          id="pass"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 };
 
