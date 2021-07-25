@@ -8,3 +8,18 @@
   width: 100%;
   height: 11rem;
 }
+
+.modal-on{
+  width: 100% !important;
+  height: auto !important;
+  display: flex !important;
+  z-index: 700;
+  position: absolute !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.none {
+  visibility: none;
+}

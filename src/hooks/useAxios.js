@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 const axios = require("axios");
 
-export const useAxios = (url) => {
+export const useAxios = (url, id) => {
   const [data, setData] = useState(null);
   const [powerstats, setPowerstats] = useState([]);
   const [details, setDetails] = useState([]);
@@ -39,10 +39,12 @@ export const useAxios = (url) => {
           lugar_de_trabajo: json.work.base,
         };
 
+        window.localStorage.setItem("CaHe" + id, "true");
         setDetails((detallesTodos) => [detalles]);
         return setPowerstats((powerstats) => [power]);
       } catch (error) {
         if (error.error === "invalid id") return true;
+        window.localStorage.setItem("CaHe" + id, "false");
         return alert("Ha ocurrido el siguiente error: " + error.error);
       }
     };
