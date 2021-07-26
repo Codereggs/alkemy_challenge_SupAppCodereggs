@@ -9,7 +9,7 @@
   height: 11rem;
 }
 
-.modal-on{
+.modal-on {
   width: 100% !important;
   height: auto !important;
   display: flex !important;
@@ -22,4 +22,5 @@
 }
 .none {
   visibility: none;
+  display: none;
 }

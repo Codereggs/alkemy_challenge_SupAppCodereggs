@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import { CardGroup } from "react-bootstrap";
 import SuperHeroCard from "./SuperHeroCard";
 
-
-
 export default function Home() {
-
-  const [idHeroe, setIdHeroe] = useState(1);
+  const [idHeroe, setIdHeroe] = useState(0);
   const [arrElementos, setArrElementos] = useState([]);
-  const [cantidad, setCantidad] = useState(1);
+  const [cantidad, setCantidad] = useState(2);
+  const [eliminarHeroe, setEliminarHeroe] = useState(null);
 
   const manejador = (data) => {
-    setIdHeroe(data)
+    setIdHeroe(data);
+  };
+
+  const seEliminaHeroe = async (bool) => {
+    if (cantidad <= 2) return setEliminarHeroe(null);
+    console.log(cantidad);
+    setEliminarHeroe(bool);
+    return setCantidad(cantidad - 1);
   };
   /* for (let i = 0; i < cantidad; i++) {
           arrayAux.push(<SuperHeroCard id={idHeroe + i} estado={manejador} />)
@@ -19,34 +24,44 @@ export default function Home() {
 
   useEffect(() => {
     let arrayAux = arrElementos;
-    if (arrayAux.length <= 5) {
-      arrayAux.push(<SuperHeroCard id={idHeroe} estado={manejador} aumentar={aumentarCantidad} />);
-      setArrElementos((elementos) => [...arrayAux])
+    if (eliminarHeroe) {
+      setEliminarHeroe(null);
+      return arrElementos.pop();
     }
 
-  }, [cantidad])
+    if (arrayAux.length <= 5) {
+      arrayAux.push(
+        <SuperHeroCard
+          id={idHeroe + cantidad}
+          key={idHeroe + cantidad}
+          estado={manejador}
+          aumentar={aumentarCantidad}
+          disminuir={seEliminaHeroe}
+        />
+      );
+      setArrElementos((elementos) => [...arrayAux]);
+    }
+  }, [cantidad]);
 
-  function aumentarCantidad() {
+  async function aumentarCantidad() {
+    if (cantidad > 6) return null;
     setCantidad(cantidad + 1);
   }
   console.log(arrElementos);
+  console.log(cantidad);
 
   return (
     <div>
       <h3>Team SuperHero</h3>
       <hr />
       <CardGroup>
-
-        {arrElementos.length === 0 ? <SuperHeroCard id={idHeroe} estado={manejador} aumentar={aumentarCantidad} /> : arrElementos.map((el) => {
-          return el
+        {arrElementos.map((el) => {
+          return el;
         })}
-        <button onClick={aumentarCantidad} >Aumentar Cantidad</button>
 
-
-
-
-
+        <button onClick={seEliminaHeroe}>Disminuir Cantidad</button>
+        <button onClick={aumentarCantidad}>Aumentar Cantidad</button>
       </CardGroup>
     </div>
-  )
+  );
 }
