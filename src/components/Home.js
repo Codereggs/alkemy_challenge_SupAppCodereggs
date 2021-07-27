@@ -1,67 +1,88 @@
 import React, { useEffect, useState } from "react";
 import { CardGroup } from "react-bootstrap";
 import SuperHeroCard from "./SuperHeroCard";
+import Search from "./Search";
 
 export default function Home() {
-  const [idHeroe, setIdHeroe] = useState(0);
+  const [cantidad, setCantidad] = useState(0);
   const [arrElementos, setArrElementos] = useState([]);
-  const [cantidad, setCantidad] = useState(2);
-  const [eliminarHeroe, setEliminarHeroe] = useState(null);
+  let arrayAux = [];
 
-  const manejador = (data) => {
-    setIdHeroe(data);
-  };
+  /*   const disminuirCantidad = (e) => {
+       if (cantidad <= 2) return true; 
+     arrayAux = arrElementos;
+    arrayAux.splice(e.id);
+    setArrElementos(arrayAux);
+    setCantidad(cantidad - 1);
+    console.log(arrElementos, e.id, cantidad);
+  }; */
 
-  const seEliminaHeroe = async (bool) => {
-    if (cantidad <= 2) return setEliminarHeroe(null);
-    console.log(cantidad);
-    setEliminarHeroe(bool);
-    return setCantidad(cantidad - 1);
-  };
-  /* for (let i = 0; i < cantidad; i++) {
-          arrayAux.push(<SuperHeroCard id={idHeroe + i} estado={manejador} />)
-        } */
+  const aumentarCantidad = (e) => {
+    arrayAux = arrElementos;
+    if (cantidad > 5) return null;
 
-  useEffect(() => {
-    let arrayAux = arrElementos;
-    if (eliminarHeroe) {
-      setEliminarHeroe(null);
-      return arrElementos.pop();
-    }
-
+    //Ficha de heroe
     if (arrayAux.length <= 5) {
       arrayAux.push(
         <SuperHeroCard
-          id={idHeroe + cantidad}
-          key={idHeroe + cantidad}
-          estado={manejador}
+          id={cantidad + 1}
+          key={cantidad + 1}
           aumentar={aumentarCantidad}
-          disminuir={seEliminaHeroe}
+          disminuir={null}
         />
       );
-      setArrElementos((elementos) => [...arrayAux]);
     }
+    setArrElementos((arrElementos) => [...arrayAux]);
+    //Cantidad
+    setCantidad(cantidad + 1);
+  };
+
+  useEffect(() => {
+    console.log(cantidad);
+    console.log(arrElementos);
+    console.log(arrElementos.length === 0);
   }, [cantidad]);
 
-  async function aumentarCantidad() {
-    if (cantidad > 6) return null;
+  /* if (arrElementos.length === 0) {
+    setArrElementos([
+      <SuperHeroCard
+        id={cantidad + 1}
+        key={cantidad + 1}
+        aumentar={aumentarCantidad}
+        disminuir={null}
+      />,
+    ]);
     setCantidad(cantidad + 1);
-  }
-  console.log(arrElementos);
-  console.log(cantidad);
+  } */
+  let card = {
+    carta: (
+      <SuperHeroCard
+        id={cantidad + 1}
+        key={cantidad + 1}
+        aumentar={aumentarCantidad}
+        disminuir={null}
+      />
+    ),
+    pato: 2,
+    carro: 3,
+  };
 
   return (
     <div>
       <h3>Team SuperHero</h3>
       <hr />
       <CardGroup>
-        {arrElementos.map((el) => {
+        {
+          console.log(arrElementos)
+          /* arrElementos.map((el) => {
           return el;
-        })}
+        }) */
+        }
 
-        <button onClick={seEliminaHeroe}>Disminuir Cantidad</button>
-        <button onClick={aumentarCantidad}>Aumentar Cantidad</button>
+        <button>Disminuir Cantidad</button>
+        <button>Aumentar Cantidad</button>
       </CardGroup>
+      <Search id={cantidad + 1} />
     </div>
   );
 }

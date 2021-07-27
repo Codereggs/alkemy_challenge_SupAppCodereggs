@@ -6,7 +6,13 @@ import DetallesHeroes from "./DetallesHeroe";
 import Encabezado from "./Encabezado";
 import Poderes from "./Poderes";
 
-export default function SuperHeroCard({ id, estado, aumentar, disminuir }) {
+export default function SuperHeroCard({
+  id,
+  aumentar,
+  disminuir,
+  setCantidad,
+  cantidad,
+}) {
   const [idHeroe, setIdHeroe] = useState(0);
   const [idCard, setidCard] = useState({ id });
 
@@ -18,12 +24,6 @@ export default function SuperHeroCard({ id, estado, aumentar, disminuir }) {
     refCard = useRef(),
     refEliminar = useRef(),
     refDetalles = useRef();
-
-  useEffect(() => {
-    let idVar = idCard.id;
-    window.localStorage.setItem("idHeroe" + idVar, idHeroe);
-    window.localStorage.setItem("CaHe" + idVar, "false");
-  }, [idHeroe, idCard]);
 
   return (
     <>
@@ -75,7 +75,7 @@ export default function SuperHeroCard({ id, estado, aumentar, disminuir }) {
               </Row>
             </Container>
             <Button
-              id={id}
+              id={idCard.id}
               variant="primary"
               onClick={handleToggleCard}
               ref={refBtnDetalles}
@@ -90,15 +90,15 @@ export default function SuperHeroCard({ id, estado, aumentar, disminuir }) {
       ) : (
         <Card style={{ width: "18rem" }} id="" border="secondary">
           <Card.Body>
-            <CartaHeroe id={id} />
+            <CartaHeroe id={idCard.id} />
             <Button
               variant="primary"
-              id={"btn" + id}
-              onClick={function () {
-                let $input = document.querySelector("#inputHeroe" + id);
-                $input = $input.value;
-                if ($input === "" || $input === undefined) return true;
-                return elegirHeroe($input);
+              id={"btn" + idCard.id}
+              onClick={() => {
+                /* let $input = document.querySelector("#inputHeroe" + idCard.id);
+                $input = $input.value; */
+                /*  if ($input === "" || $input === undefined) return true; */
+                aumentar();
               }}
             >
               Aceptar
@@ -110,13 +110,14 @@ export default function SuperHeroCard({ id, estado, aumentar, disminuir }) {
   );
 
   function elegirHeroe(input) {
-    setIdHeroe(input);
-    return aumentar();
+    /* setIdHeroe(input); */
+    cantidad(1);
+    return aumentar(input);
   }
 
   function eliminarHeroe() {
+    disminuir(idCard);
     setIdHeroe(0);
-    disminuir(true);
   }
 
   function handleToggleCard(e) {
