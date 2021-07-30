@@ -28,7 +28,16 @@ peso, acumulativo de powerstats, etc.
 
 ## Para iniciar
 
-Solo deben activar NPM START una vez clonado el repositorio y accesar a http://localhost:3000/ ya que la solicitud al endpoint de alkemy es de http. 
+Debes clonar el repo.
+
+Luego aplicar npm install.
+
+Despues activar NPM START una vez clonado el repositorio y accesar a http://localhost:3000/ ya que la solicitud al endpoint de alkemy es de http.
+
+Luego instalar esta extensión en el navegador:
+- Moesif CORS https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc
+
+Es importante tener activo esta extensión en el navegador para accesar a buscar los héroes, debido a que estarás haciendo las peticiones desde Http.
 
 ## Hecho por:
 
