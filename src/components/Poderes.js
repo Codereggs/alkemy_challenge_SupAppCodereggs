@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Col, ListGroup } from "react-bootstrap";
 
 export default function Poderes({
   inteligencia,
@@ -8,15 +8,43 @@ export default function Poderes({
   durabilidad,
   poder,
   combate,
+  refPoderes,
 }) {
   return (
     <>
-      <Card.Text>Inteligencia: {inteligencia}</Card.Text>
-      <Card.Text>Fuerza: {fuerza}</Card.Text>
-      <Card.Text>Velocidad: {velocidad}</Card.Text>
-      <Card.Text>Durabilidad: {durabilidad}</Card.Text>
-      <Card.Text>Poder: {poder}</Card.Text>
-      <Card.Text>Combate: {combate}</Card.Text>
+      <style type="text/css">
+        {`
+    .font-bold {
+      font-weight: bold;
+     
+    }
+    `}
+      </style>
+      <Col className="bg-dark " ref={refPoderes}>
+        <ListGroup variant="flush" className="bg-dark text-white grupoLista">
+          <ListGroup.Item className="font-bold bg-dark text-white">
+            - Poderes -
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Inteligencia: {inteligencia}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Fuerza: {fuerza}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Velocidad: {velocidad}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Durabilidad: {durabilidad}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Poder: {poder}
+          </ListGroup.Item>
+          <ListGroup.Item className="bg-dark text-white ">
+            Combate: {combate}
+          </ListGroup.Item>
+        </ListGroup>
+      </Col>
     </>
   );
 }

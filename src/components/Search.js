@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import SuperHeroSearchCard from "./SuperHeroSearchCard";
-import { CardGroup } from "react-bootstrap";
+import { Alert, Button, Row, Form } from "react-bootstrap";
 const axios = require("axios");
 
 const Search = ({ setBD, borrarData }) => {
@@ -11,7 +11,7 @@ const Search = ({ setBD, borrarData }) => {
     const errors = {};
     if (!values.search) {
       errors.search = "Campo vacío.";
-    } else if (!/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/gi.test(values.search)) {
+    } else if (!/^[A-Za-z0-9\s]+$/gi.test(values.search)) {
       errors.search = "Este campo solo acepta letras y espacios en blanco.";
     }
 
@@ -20,7 +20,7 @@ const Search = ({ setBD, borrarData }) => {
 
   const formik = useFormik({
     initialValues: {
-      search: "Flash",
+      search: "",
     },
     validate,
     onSubmit: (values) => {
@@ -34,7 +34,6 @@ const Search = ({ setBD, borrarData }) => {
             json = await recibirDatos;
           let superHeroes = [json.data.results];
           setSupersEncontrados(...superHeroes);
-          console.log(superHeroes);
         } catch (err) {
           alert(err + " Por favor intente de nuevo con los datos correctos.");
         }
@@ -47,22 +46,44 @@ const Search = ({ setBD, borrarData }) => {
   return (
     <>
       <div className="Inicio">
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="search">Buscar Héroe</label>
-          <input
+        <Form
+          onSubmit={formik.handleSubmit}
+          style={{ margin: "1.5rem" }}
+          className="miForm"
+        >
+          <Form.Label htmlFor="search" className="fw-bold">
+            Buscar Héroe
+          </Form.Label>
+          <Form.Control
             id="search"
             name="search"
             type="text"
             onChange={formik.handleChange}
             value={formik.values.search}
           />
-          {formik.errors.search ? <div>{formik.errors.search}</div> : null}
-          <button type="submit">Buscar</button>
-        </form>
+          {formik.errors.search ? (
+            <Alert variant="danger" style={{ padding: "0.2rem" }}>
+              {formik.errors.search}
+            </Alert>
+          ) : null}
+          <Button type="submit" variant="dark" style={{ marginTop: "1rem" }}>
+            Buscar
+          </Button>
+        </Form>
       </div>
-      <CardGroup>
+      <Row
+        xs="auto"
+        className="text-center"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {supersEncontrados === undefined ? (
-          <h4>El héroe que estás buscando no existe. Por favor busca otro.</h4>
+          <Alert variant="danger">
+            El héroe que estás buscando no existe. Por favor busca otro.
+          </Alert>
         ) : supersEncontrados.length !== 0 ? (
           supersEncontrados.map((el) => {
             return (
@@ -92,9 +113,18 @@ const Search = ({ setBD, borrarData }) => {
             );
           })
         ) : (
-          <h4>Busca un heroe.</h4>
+          <Alert
+            variant="success"
+            style={{
+              alignSelf: "center",
+              justifySelf: "center",
+              marginBottom: "1rem",
+            }}
+          >
+            Hola, busca un héroe.
+          </Alert>
         )}
-      </CardGroup>
+      </Row>
     </>
   );
 };

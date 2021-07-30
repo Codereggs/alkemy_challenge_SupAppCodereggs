@@ -13,14 +13,109 @@
   width: 100% !important;
   height: auto !important;
   display: flex !important;
-  z-index: 700;
-  position: absolute !important;
+  z-index: 3;
+  position: fixed !important;
   top: 0;
-  bottom: 0;
+  bottom: 1rem;
   left: 0;
   right: 0;
+  margin: 0 !important;
+  overflow: auto;
+  transform: translate(0) !important;
+}
+.modal-on > * {
+  font-size: 2rem !important;
+}
+.modal-on img {
+  height: fit-content;
+  max-width: 15%;
+  border-radius: 15px;
+}
+.modal-on > div > .h5 {
+  font-size: 2rem !important;
 }
 .none {
-  visibility: none;
-  display: none;
+  visibility: none !important;
+  display: none !important;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+.card {
+  margin: 1rem auto;
+  transition: 0.7s;
+}
+
+.card:hover,
+.card:active {
+  transform: translate(0, -5%);
+}
+
+.cardElegida:hover {
+  transform: translate(0);
+}
+
+@keyframes aparecer {
+  from {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translate(0, -10%);
+  }
+}
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+.row > *,
+.row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.list-group-item {
+  border-color: cornflowerblue;
+}
+
+.alertsLogin {
+  font-size: 1.2rem;
+  padding: 0.4rem !important;
+}
+
+.miForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-around;
+}
+
+hr {
+  color: black !important;
+  background-color: black;
+  font-weight: bold;
+  height: 100px;
+}
+
+/*  MEDIA QUERIES*/
+
+@media screen and (max-width: 540px) {
+  body {
+    font-size: 1rem !important;
+  }
+  .modal-on img {
+    height: fit-content;
+    max-width: 50%;
+    border-radius: 15px;
+  }
+  .modal-on > div > .h5 {
+    font-size: 2rem !important;
+  }
+  .modal-on > * {
+    font-size: 1.5rem !important;
+  }
 }

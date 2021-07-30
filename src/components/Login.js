@@ -1,8 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
+import { Alert, Form, Button } from "react-bootstrap";
 const axios = require("axios");
 
-const Login = () => {
+const Login = ({ setLogueado }) => {
   const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -42,6 +43,7 @@ const Login = () => {
             }),
             json = await datosEnviados.data;
           window.localStorage.setItem("token", JSON.stringify(json.token));
+          setLogueado(true);
         } catch (err) {
           alert(err + " Por favor intente de nuevo con los datos correctos.");
         }
@@ -53,27 +55,43 @@ const Login = () => {
 
   return (
     <div className="Inicio">
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">Email Address</label>
-        <input
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Label htmlFor="email" className="fw-bold">
+          Correo Electrónico
+        </Form.Label>
+        <Form.Control
           id="email"
           name="email"
           type="email"
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-        <label htmlFor="pass">Password</label>
-        <input
+        {formik.errors.email ? (
+          <Alert className="alertsLogin" variant="danger">
+            {formik.errors.email}
+          </Alert>
+        ) : null}
+
+        <Form.Label htmlFor="pass" className="fw-bold">
+          Contraseña
+        </Form.Label>
+        <Form.Control
           id="pass"
           name="password"
           type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-        <button type="submit">Submit</button>
-      </form>
+        {formik.errors.password ? (
+          <Alert className="alertsLogin" variant="danger">
+            {formik.errors.password}
+          </Alert>
+        ) : null}
+
+        <Button variant="primary" type="submit" className="mt-2">
+          Enviar
+        </Button>
+      </Form>
     </div>
   );
 };
