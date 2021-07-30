@@ -58,6 +58,7 @@ const Search = ({ setBD, borrarData }) => {
             id="search"
             name="search"
             type="text"
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.search}
           />

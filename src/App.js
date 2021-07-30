@@ -20,7 +20,7 @@ function App() {
 
     window.addEventListener("resize", handleResize);
   }, []);
-  console.log(dimensions.outerHeight);
+
   const [logueado, setLogueado] = useState(false);
   const MySection = styled.section`
     width: 100%;

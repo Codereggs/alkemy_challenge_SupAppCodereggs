@@ -63,6 +63,7 @@ const Login = ({ setLogueado }) => {
           id="email"
           name="email"
           type="email"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.email}
         />
@@ -79,6 +80,7 @@ const Login = ({ setLogueado }) => {
           id="pass"
           name="password"
           type="password"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
         />
