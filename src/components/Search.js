@@ -54,7 +54,7 @@ const Search = ({ setBD, borrarData }) => {
           <Form.Label htmlFor="search" className="fw-bold">
             Buscar Héroe
           </Form.Label>
-          <Form.Control
+          <input
             id="search"
             name="search"
             type="text"
