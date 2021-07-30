@@ -29,7 +29,7 @@ const Login = ({ setLogueado }) => {
     initialValues: {},
     validate,
     onSubmit: (values) => {
-      let url = "http://challenge-react.alkemy.org";
+      let url = "//challenge-react.alkemy.org";
 
       const postUser = async (url) => {
         try {
