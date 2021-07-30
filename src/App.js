@@ -58,7 +58,7 @@ function App() {
           style={{
             alignItems: "stretch",
             height: dimensions.outerHeight + "px",
-            position: "fixed",
+            position: "absolute",
             bottom: 0,
             top: 0,
             right: 0,
@@ -75,7 +75,7 @@ function App() {
           color: "white",
           borderTop: "3px solid gray",
           padding: "0.5rem",
-          position: "fixed",
+          position: "absolute",
           bottom: 0,
           display: "flex",
           flexDirection: "column",

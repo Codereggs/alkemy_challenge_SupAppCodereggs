@@ -26,10 +26,7 @@ const Login = ({ setLogueado }) => {
   };
 
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+    initialValues: {},
     validate,
     onSubmit: (values) => {
       let url = "http://challenge-react.alkemy.org";
@@ -80,9 +77,9 @@ const Login = ({ setLogueado }) => {
           id="pass"
           name="password"
           type="password"
+          value={formik.values.password}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          value={formik.values.password}
         />
         {formik.errors.password ? (
           <Alert className="alertsLogin" variant="danger">

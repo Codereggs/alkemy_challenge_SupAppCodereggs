@@ -94,13 +94,6 @@
   align-content: space-around;
 }
 
-hr {
-  color: black !important;
-  background-color: black;
-  font-weight: bold;
-  height: 100px;
-}
-
 /*  MEDIA QUERIES*/
 
 @media screen and (max-width: 540px) {
