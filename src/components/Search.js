@@ -25,7 +25,7 @@ const Search = ({ setBD, borrarData }) => {
     validate,
     onSubmit: (values) => {
       let url =
-        "https://superheroapi.com/api/10159182639604457/search/" +
+        "https://superheroapi.com/api.php/10159182639604457/search/" +
         values.search;
 
       const getSearch = async (url) => {
