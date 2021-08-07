@@ -4,26 +4,11 @@ import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import fondoHeroe from "./assets/1354.jpg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-  });
-  useEffect(() => {
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        outerHeight: window.outerHeight,
-      });
-    }
-
-    window.addEventListener("resize", handleResize);
-  }, []);
-
   const [logueado, setLogueado] = useState(false);
   const MySection = styled.section`
-    width: 100%;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -41,14 +26,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
-      {window.localStorage.getItem("token") === null ? (
+      {logueado === false ? (
         <MySection
           style={{
             backgroundImage: `url(${fondoHeroe})`,
             backgroundSize: "cover",
             alignItems: "center",
             backgroundRepeat: "no-repeat",
-            height: dimensions.height + "px",
+            height: "100vh",
           }}
         >
           <Login setLogueado={setLogueado} />
@@ -57,7 +42,7 @@ function App() {
         <MySection
           style={{
             alignItems: "stretch",
-            height: dimensions.outerHeight + "px",
+            height: "100vh",
             position: "absolute",
             bottom: 0,
             top: 0,
@@ -75,12 +60,13 @@ function App() {
           color: "white",
           borderTop: "3px solid gray",
           padding: "0.5rem",
-          position: "absolute",
+          position: "fixed",
           bottom: 0,
           display: "flex",
           flexDirection: "column",
           marginTop: "2rem",
           zIndex: "2",
+          width: "100%",
         }}
       >
         <p

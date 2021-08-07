@@ -12,7 +12,6 @@ import SuperHeroSearchCard from "./SuperHeroSearchCard";
 import Supers from "../assets/marvelpowerstats.gif";
 
 export default function Home() {
-  const [cantidad, setCantidad] = useState(0);
   const [BD, setBD] = useState([]);
   const [buenos, setBuenos] = useState(0);
   const [malos, setMalos] = useState(0);
@@ -226,7 +225,7 @@ export default function Home() {
         </CardGroup>
       </Container>
       <Container style={{ marginBottom: "2rem" }}>
-        <Search id={cantidad + 1} setBD={createData} borrarData={borrarData} />
+        <Search setBD={createData} borrarData={borrarData} />
       </Container>
       <br />
       <br />
