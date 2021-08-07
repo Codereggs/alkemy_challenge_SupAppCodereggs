@@ -28,7 +28,9 @@ peso, acumulativo de powerstats, etc.
 
 ## Para iniciar
 
-Solo deben activar NPM START una vez clonado el repositorio y accesar a http://localhost:3000/ ya que la solicitud al endpoint de alkemy es de http. 
+Aplicar npm install.
+
+Despues npm start y accesar a http://localhost:3000/
 
 ## Hecho por:
 
