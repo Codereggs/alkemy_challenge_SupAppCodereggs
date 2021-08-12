@@ -112,12 +112,11 @@ export default function Home() {
 
     `}
       </style>
-      <Container bsPrefix="miContainer" fluid rounded>
+      <Container bsPrefix="miContainer" fluid className="rounded">
         <Row>
           <Col xs={6} lg={9} style={{ display: "flex" }}>
             <Image
               src={Supers}
-              rounded
               style={{
                 width: "100%",
                 height: "auto",

@@ -87,7 +87,7 @@ const Login = ({ setLogueado }) => {
           </Alert>
         ) : null}
 
-        <Button variant="primary" type="submit" className="mt-2">
+        <Button variant="primary" type="submit" className="mt-2 rounded">
           Enviar
         </Button>
       </Form>

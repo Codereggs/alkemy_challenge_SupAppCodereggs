@@ -54,7 +54,7 @@ const Search = ({ setBD, borrarData }) => {
           <Form.Label htmlFor="search" className="fw-bold">
             Buscar Héroe
           </Form.Label>
-          <input
+          <Form.Control
             id="search"
             name="search"
             type="text"
@@ -67,7 +67,12 @@ const Search = ({ setBD, borrarData }) => {
               {formik.errors.search}
             </Alert>
           ) : null}
-          <Button type="submit" variant="dark" style={{ marginTop: "1rem" }}>
+          <Button
+            type="submit"
+            variant="dark"
+            style={{ marginTop: "1rem" }}
+            className="rounded"
+          >
             Buscar
           </Button>
         </Form>

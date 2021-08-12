@@ -19,24 +19,13 @@ html {
   min-height: 100vh;
 }
 
-form,
-.form-control,
-.form-label {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-}
-
-hr {
-  color: black !important;
-  background-color: black;
-  font-weight: bold;
-  height: 100px;
-}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button.btn {
+  border-radius: 0;
 }
 
 .imgCard {
