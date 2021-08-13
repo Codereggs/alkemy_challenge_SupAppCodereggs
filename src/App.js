@@ -56,20 +56,7 @@ function App() {
           <Login setLogueando={setLogueando} />
         </section>
       ) : (
-        <section
-          className="app-sections"
-          key={2}
-          style={{
-            alignItems: "stretch",
-            height: "100vh",
-            position: "absolute",
-            bottom: 0,
-            top: 0,
-            right: 0,
-            left: 0,
-            overflow: "auto",
-          }}
-        >
+        <section className="app-sections" key={2}>
           <Home />
         </section>
       )}

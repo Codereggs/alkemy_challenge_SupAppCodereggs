@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import SuperHeroSearchCard from "./SuperHeroSearchCard";
-import { Alert, Button, Row, Form } from "react-bootstrap";
+import { Alert, Button, Form, Row } from "react-bootstrap";
 const axios = require("axios");
 
 const Search = ({ setBD, borrarData }) => {
@@ -78,7 +78,6 @@ const Search = ({ setBD, borrarData }) => {
         </Form>
       </div>
       <Row
-        xs="auto"
         className="text-center"
         style={{
           display: "flex",

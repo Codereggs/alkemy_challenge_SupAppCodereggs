@@ -61,7 +61,14 @@ export default function SuperHeroSearchCard({
   });
   return (
     <>
-      <Col xs={6} sm={4} lg={2} style={{ backgroundColor: "inherit" }}>
+      <Col
+        xs={6}
+        sm={4}
+        lg={2}
+        xl={2}
+        style={{ backgroundColor: "inherit" }}
+        className="col-cards"
+      >
         <Card
           style={{ width: "10rem", fontSize: "1rem" }}
           className="border border-dark bg-dark text-white shadow"

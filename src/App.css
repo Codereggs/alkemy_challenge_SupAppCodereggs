@@ -71,10 +71,8 @@
   padding: 0 !important;
 }
 
-.row > *,
 .row {
-  margin: 0 !important;
-  padding: 0 !important;
+  --bs-gutter-x: 0 !important;
 }
 
 .list-group-item {
@@ -110,5 +108,11 @@
   }
   .modal-on > * {
     font-size: 1.5rem !important;
+  }
+  .titulo-app {
+    font-size: 2.5rem;
+  }
+  .img-powerstats {
+    width: inherit;
   }
 }

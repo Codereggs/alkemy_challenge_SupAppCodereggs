@@ -81,68 +81,22 @@ export default function Home() {
   };
 
   return (
-    <Container>
-      <h2
-        className="fw-bold"
-        style={{
-          alignSelf: "center",
-          justifySelf: "center",
-          margin: "1rem",
-          fontFamily: "'Teko', sans-serif",
-          fontSize: "4rem",
-        }}
-      >
-        Team SuperHero
-      </h2>
+    <Container fluid>
+      <h2 className="fw-bold titulo-app">Team SuperHero</h2>
       <hr />
-      <style type="text/css">
-        {`
-    .miContainer-fluid {
-      background-color: #4d4d4d;
-      color: white;
-      height: fit-content;
-    }
-    .miContainer-fluid .row {
-      border: 1px solid black;
-    }
-       .borderP {
-        border: none;
-        
-    }
-
-    `}
-      </style>
-      <Container bsPrefix="miContainer" fluid className="rounded">
-        <Row>
-          <Col xs={6} lg={9} style={{ display: "flex" }}>
-            <Image
-              src={Supers}
-              style={{
-                width: "100%",
-                height: "auto",
-                alignSelf: "center",
-                justifySelf: "center",
-              }}
-            />
+      <Container
+        bsPrefix="miContainer"
+        fluid
+        className="rounded con-powerstats"
+      >
+        <Row className="fila-powerstats">
+          <Col xs={12} md={6} lg={8} className="col-img">
+            <Image src={Supers} className="img-powerstats" />
           </Col>
-          <Col
-            xs={6}
-            lg={3}
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: " center",
-              alignContent: "stretch",
-            }}
-          >
+          <Col xs={12} md={6} lg={4} className="col-list">
             <ListGroup
               variant="flush"
-              className="bg-darky text-white "
-              style={{
-                width: "100%",
-                fontFamily: "'Teko', sans-serif",
-                fontSize: "2rem",
-              }}
+              className="bg-darky text-white list-powerstats"
             >
               <ListGroup.Item
                 bsPrefix="borderP"
@@ -190,7 +144,7 @@ export default function Home() {
           </Col>
         </Row>
       </Container>
-      <Container className="text-center">
+      <Container className="text-center" fluid>
         <CardGroup>
           {BD !== null
             ? BD.map((el) => {
