@@ -2,20 +2,28 @@ import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styled from "styled-components";
 import fondoHeroe from "./assets/1354.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { postUser } from "./helpers/useAxios";
+import { ErrMessage } from "./components/ErrMessage";
 
 function App() {
   const [logueado, setLogueado] = useState(false);
-  const MySection = styled.section`
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.5rem;
-    align-items: stretch;
-    background-color: #f5ad42;
-  `;
+  const [logueando, setLogueando] = useState(null);
+  const [showErr, setShowErr] = useState(null);
+
+  useEffect(() => {
+    if (logueando === null) return;
+    const axiosData = async () => {
+      let url = "//challenge-react.alkemy.org";
+      const [resData] = await Promise.all([postUser(url, logueando)]);
+      if (resData.status < 200 || resData.status > 299)
+        return [setShowErr(resData)];
+      setLogueado(true);
+    };
+
+    axiosData();
+  }, [logueando]);
 
   //Eliminar el token
   window.onbeforeunload = () => {
@@ -27,7 +35,9 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       {logueado === false ? (
-        <MySection
+        <section
+          className="app-sections"
+          key={1}
           style={{
             backgroundImage: `url(${fondoHeroe})`,
             backgroundSize: "cover",
@@ -36,10 +46,19 @@ function App() {
             height: "100vh",
           }}
         >
-          <Login setLogueado={setLogueado} />
-        </MySection>
+          {showErr ? (
+            <ErrMessage
+              smsg={showErr.status}
+              msg={showErr.data.error}
+              setShow={setShowErr}
+            />
+          ) : null}
+          <Login setLogueando={setLogueando} />
+        </section>
       ) : (
-        <MySection
+        <section
+          className="app-sections"
+          key={2}
           style={{
             alignItems: "stretch",
             height: "100vh",
@@ -52,9 +71,11 @@ function App() {
           }}
         >
           <Home />
-        </MySection>
+        </section>
       )}
-      <MySection
+      <section
+        className="app-sections"
+        key={3}
         style={{
           backgroundColor: "black",
           color: "white",
@@ -79,7 +100,7 @@ function App() {
         >
           By Codereggs
         </p>
-      </MySection>
+      </section>
     </div>
   );
 }

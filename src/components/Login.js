@@ -1,9 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Alert, Form, Button } from "react-bootstrap";
-const axios = require("axios");
 
-const Login = ({ setLogueado }) => {
+const Login = ({ setLogueando }) => {
   const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -26,27 +25,10 @@ const Login = ({ setLogueado }) => {
   };
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: { email: "", password: "" },
     validate,
     onSubmit: (values) => {
-      let url = "//challenge-react.alkemy.org";
-
-      const postUser = async (url) => {
-        try {
-          const datosEnviados = await axios({
-              method: "post",
-              url: url,
-              data: values,
-            }),
-            json = await datosEnviados.data;
-          window.localStorage.setItem("token", JSON.stringify(json.token));
-          setLogueado(true);
-        } catch (err) {
-          alert(err + " Por favor intente de nuevo con los datos correctos.");
-        }
-      };
-
-      postUser(url);
+      setLogueando(values);
     },
   });
 
