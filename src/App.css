@@ -3,12 +3,6 @@
   color: white;
 }
 
-.espacio {
-  background-color: black;
-  width: 100%;
-  height: 11rem;
-}
-
 .modal-on {
   width: 100% !important;
   height: auto !important;
@@ -35,8 +29,13 @@
   font-size: 2rem !important;
 }
 .none {
-  visibility: none !important;
-  display: none !important;
+  visibility: hidden;
+  display: none;
+}
+
+div.none {
+  visibility: hidden;
+  display: none;
 }
 
 .card-body {
@@ -92,11 +91,41 @@
   align-content: space-around;
 }
 
+input.form-control {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: calc(1em);
+}
+
+.log-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-decoration: none;
+}
+.link-log-in {
+}
+.img-log-in {
+  width: 3rem;
+}
+
 /*  MEDIA QUERIES*/
 
 @media screen and (max-width: 540px) {
   body {
     font-size: 1rem !important;
+  }
+  button.btn-hero-detalles {
+    visibility: none;
+    display: none;
+  }
+
+  .none {
+    visibility: visible;
+    display: initial;
   }
   .modal-on img {
     height: fit-content;
@@ -114,5 +143,85 @@
   }
   .img-powerstats {
     width: inherit;
+  }
+
+  .carta-heroe {
+    width: 8rem;
+    font-size: 0.7rem;
+    height: 238px;
+    font-family: "Bebas Neue";
+  }
+
+  .div-card-heroe {
+    width: 200px;
+  }
+  .imgCard {
+    width: 79px;
+    height: 160px;
+  }
+  .card-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  div.list-group-item {
+    padding: 0;
+  }
+
+  .flip-card {
+    background-color: transparent;
+    border: 0px;
+    perspective: 3000px; /* Genera un efecto 3D */
+  }
+
+  /* Este contenedor nos posiciona los dos lados de la tarjeta */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  /* Crea la animación para girar la tarjeta de forma horizontal cuando el ratón se pone encima*/
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+    /*transform: rotateX(180deg);*/ /*si lo quieres con giro vertical*/
+  }
+
+  /* Estructura básica de las dos caras */
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  /* Estructura específica de la cara frontal */
+  /* Ajusta la imagen al tamaño de la tarjeta para hacerla adaptable*/
+  .flip-card-front-post > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Estructura específica de la cara trasera */
+  .flip-card-back {
+    background-color: #212529;
+    color: white;
+    overflow: auto;
+    transform: rotateY(180deg);
+  }
+
+  input.form-control {
+    font-size: 1.5rem;
+  }
+  div.h5 {
+    margin: 0.5rem;
+    font-size: calc(1em + 1vw);
   }
 }

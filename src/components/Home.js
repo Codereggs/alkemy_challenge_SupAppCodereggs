@@ -82,60 +82,59 @@ export default function Home() {
 
   return (
     <Container fluid>
-      <h2 className="fw-bold titulo-app">Team SuperHero</h2>
-      <hr />
       <Container
         bsPrefix="miContainer"
         fluid
         className="rounded con-powerstats"
       >
+        <h2 className="fw-bold titulo-app">Team SuperHero</h2>
         <Row className="fila-powerstats">
           <Col xs={12} md={6} lg={8} className="col-img">
             <Image src={Supers} className="img-powerstats" />
           </Col>
-          <Col xs={12} md={6} lg={4} className="col-list">
+          <Col xs={12} md={6} lg={4} className="col-list powerstats-box-shadow">
             <ListGroup
               variant="flush"
               className="bg-darky text-white list-powerstats"
             >
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white tw-bold "
               >
                 POWERSTATS:
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[0]}
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[1]}
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[2]}
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[3]}
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[4]}
               </ListGroup.Item>
               <ListGroup.Item
-                bsPrefix="borderP"
+                bsPrefix="powerstats-text"
                 className="bg-darky text-white "
               >
                 {powerstatsFinal[5]}

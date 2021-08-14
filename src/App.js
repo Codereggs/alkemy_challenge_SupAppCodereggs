@@ -6,6 +6,7 @@ import fondoHeroe from "./assets/1354.jpg";
 import { useState, useEffect } from "react";
 import { postUser } from "./helpers/useAxios";
 import { ErrMessage } from "./components/ErrMessage";
+import registro from "./assets/registro.svg";
 
 function App() {
   const [logueado, setLogueado] = useState(false);
@@ -15,7 +16,14 @@ function App() {
   useEffect(() => {
     if (logueando === null) return;
     const axiosData = async () => {
-      let url = "//challenge-react.alkemy.org";
+      let url;
+
+      if (logueando.email.toUpperCase() === "CHALLENGE@ALKEMY.ORG")
+        url = "//challenge-react.alkemy.org";
+      else {
+        url = "//user-register-api.herokuapp.com/";
+      }
+
       const [resData] = await Promise.all([postUser(url, logueando)]);
       if (resData.status < 200 || resData.status > 299)
         return [setShowErr(resData)];
@@ -46,6 +54,13 @@ function App() {
             height: "100vh",
           }}
         >
+          <div className="log-in">
+            <a href="#" className="link-log-in">
+              {/*Quedamos en meter el boton del login y luego una ventana modal con un formulario de registro*/}
+              <img src={registro} alt="registro" className="img-log-in"></img>
+              Registrarse
+            </a>
+          </div>
           {showErr ? (
             <ErrMessage
               smsg={showErr.status}

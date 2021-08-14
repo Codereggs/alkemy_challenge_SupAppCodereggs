@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import SuperHeroSearchCard from "./SuperHeroSearchCard";
 import { Alert, Button, Form, Row } from "react-bootstrap";
-const axios = require("axios");
+import { getData } from "../helpers/useAxios";
+import { Loader } from "./Loader";
 
 const Search = ({ setBD, borrarData }) => {
   const [supersEncontrados, setSupersEncontrados] = useState([]);
+  const [searching, setSearching] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const validate = (values) => {
     const errors = {};
@@ -24,25 +27,27 @@ const Search = ({ setBD, borrarData }) => {
     },
     validate,
     onSubmit: (values) => {
-      let url =
-        "https://superheroapi.com/api.php/10159182639604457/search/" +
-        values.search;
-
-      const getSearch = async (url) => {
-        try {
-          const recibirDatos = await axios.get(url),
-            json = await recibirDatos;
-          let superHeroes = [json.data.results];
-          setSupersEncontrados(...superHeroes);
-        } catch (err) {
-          alert(err + " Por favor intente de nuevo con los datos correctos.");
-        }
-      };
-
-      getSearch(url);
+      setSearching(values);
     },
   });
+  useEffect(() => {
+    if (searching === null) return;
 
+    const getAxiosData = async () => {
+      let urlHero =
+        "https://superheroapi.com/api.php/10159182639604457/search/" +
+        searching.search;
+      setLoading(true);
+      const [resData] = await Promise.all([getData(urlHero)]);
+      if (resData.status < 200 || resData.status > 299) return alert(resData);
+      let superHeroes = [resData.results];
+      setSupersEncontrados(...superHeroes);
+      setSearching(null);
+      setLoading(false);
+    };
+
+    getAxiosData();
+  }, [searching]);
   return (
     <>
       <div className="Inicio">
@@ -51,8 +56,8 @@ const Search = ({ setBD, borrarData }) => {
           style={{ margin: "1.5rem" }}
           className="miForm"
         >
-          <Form.Label htmlFor="search" className="fw-bold">
-            Buscar Héroe
+          <Form.Label htmlFor="search" className="fw-bold label-img">
+            Encuentra tu Héroe
           </Form.Label>
           <Form.Control
             id="search"
@@ -67,14 +72,17 @@ const Search = ({ setBD, borrarData }) => {
               {formik.errors.search}
             </Alert>
           ) : null}
-          <Button
-            type="submit"
-            variant="dark"
-            style={{ marginTop: "1rem" }}
-            className="rounded"
-          >
-            Buscar
-          </Button>
+          {loading ? (
+            <Loader />
+          ) : (
+            <Button
+              type="submit"
+              variant="dark"
+              className="rounded btn-buscar-heroe"
+            >
+              Buscar
+            </Button>
+          )}
         </Form>
       </div>
       <Row
@@ -117,18 +125,7 @@ const Search = ({ setBD, borrarData }) => {
               />
             );
           })
-        ) : (
-          <Alert
-            variant="success"
-            style={{
-              alignSelf: "center",
-              justifySelf: "center",
-              marginBottom: "1rem",
-            }}
-          >
-            Hola, busca un héroe.
-          </Alert>
-        )}
+        ) : null}
       </Row>
     </>
   );
