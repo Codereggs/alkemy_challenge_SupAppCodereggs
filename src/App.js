@@ -39,6 +39,9 @@ function App() {
       if (resData.status < 200 || resData.status > 299)
         return [setShowErr(resData)];
       setLogueado(true);
+      if (logueando.email.toUpperCase() === "CHALLENGE@ALKEMY.ORG")
+        window.localStorage.setItem("token", resData.token);
+      window.localStorage.setItem("token", resData.jwt);
     };
 
     axiosData();
@@ -54,8 +57,7 @@ function App() {
       if (!resData) return;
       if (resData.status < 200 || resData.status > 299) {
         setLoader(false);
-        setShowErr(resData);
-        return alert(resData);
+        return setShowErr(resData);
       }
       setLoader(false);
       setShowSuccess(true);
@@ -64,6 +66,12 @@ function App() {
 
     axiosData();
   }, [registrando]);
+
+  //Verificar si estoy activo o no
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) setLogueado(true);
+    else setLogueado(false);
+  }, [logueado]);
 
   //Eliminar el token
   window.onbeforeunload = () => {
