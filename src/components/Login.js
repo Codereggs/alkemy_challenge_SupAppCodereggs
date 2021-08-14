@@ -29,6 +29,7 @@ const Login = ({ setLogueando }) => {
     validate,
     onSubmit: (values) => {
       setLogueando(values);
+      formik.handleReset();
     },
   });
 
@@ -69,7 +70,7 @@ const Login = ({ setLogueando }) => {
           </Alert>
         ) : null}
 
-        <Button variant="primary" type="submit" className="mt-2 rounded">
+        <Button type="submit" className="mt-2 rounded btn-hero">
           Enviar
         </Button>
       </Form>

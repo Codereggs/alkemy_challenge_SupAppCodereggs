@@ -23,3 +23,22 @@ export const getData = async (url) => {
     return error;
   }
 };
+
+export const postRegistration = async (url, values) => {
+  try {
+    const dataAx = await axios({
+      method: "post",
+      url: url,
+      data: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      },
+    });
+    return dataAx;
+  } catch (err) {
+    let error = err.response;
+    return error;
+  }
+};

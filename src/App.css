@@ -96,22 +96,65 @@ input.form-control {
   font-size: calc(1em);
 }
 
-.log-in {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.sign-in {
   position: absolute;
   top: 20px;
   right: 20px;
   text-decoration: none;
 }
-.link-log-in {
+
+.form-sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.img-log-in {
+.link-sign-in {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(1em);
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-family: "teko";
+  background-color: #ff9800;
+  padding: 0.5rem;
+  border: 2px solid #b26a00;
+  border-radius: 10px;
+}
+.link-sign-in:hover,
+.img-sign-in:hover {
+  border-color: #ff9800;
+  background-color: #ffac33;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.img-sign-in {
   width: 3rem;
 }
 
+div.modal-content {
+  font-size: calc(1.3em);
+  font-family: "teko";
+  background-color: #ffac33;
+  border: 2px solid #b26a00;
+}
+div.alertsSignIn {
+  display: inherit;
+  font-size: 1em;
+  padding: 0.1rem;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+label.form-label {
+  margin-top: 1em;
+}
 /*  MEDIA QUERIES*/
 
 @media screen and (max-width: 540px) {

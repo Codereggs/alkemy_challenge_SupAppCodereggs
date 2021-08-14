@@ -4,14 +4,23 @@ import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import fondoHeroe from "./assets/1354.jpg";
 import { useState, useEffect } from "react";
-import { postUser } from "./helpers/useAxios";
+import { postRegistration, postUser } from "./helpers/useAxios";
 import { ErrMessage } from "./components/ErrMessage";
 import registro from "./assets/registro.svg";
+import { ModalSignIn } from "./components/ModalSignIn";
+import { SuccMessage } from "./components/SuccMessage";
 
 function App() {
   const [logueado, setLogueado] = useState(false);
   const [logueando, setLogueando] = useState(null);
+  const [registrando, setRegistrando] = useState(null);
   const [showErr, setShowErr] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [loader, setLoader] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
 
   useEffect(() => {
     if (logueando === null) return;
@@ -21,10 +30,12 @@ function App() {
       if (logueando.email.toUpperCase() === "CHALLENGE@ALKEMY.ORG")
         url = "//challenge-react.alkemy.org";
       else {
-        url = "//user-register-api.herokuapp.com/";
+        url = "https://user-register-api.herokuapp.com/login";
       }
-
+      console.log(logueando);
       const [resData] = await Promise.all([postUser(url, logueando)]);
+      console.log(resData);
+      if (!resData) return;
       if (resData.status < 200 || resData.status > 299)
         return [setShowErr(resData)];
       setLogueado(true);
@@ -32,6 +43,27 @@ function App() {
 
     axiosData();
   }, [logueando]);
+
+  useEffect(() => {
+    if (registrando === null) return;
+    const axiosData = async () => {
+      let url = "https://user-register-api.herokuapp.com/register";
+      setLoader(true);
+      const [resData] = await Promise.all([postRegistration(url, registrando)]);
+      console.log(resData);
+      if (!resData) return;
+      if (resData.status < 200 || resData.status > 299) {
+        setLoader(false);
+        setShowErr(resData);
+        return alert(resData);
+      }
+      setLoader(false);
+      setShowSuccess(true);
+      handleClose();
+    };
+
+    axiosData();
+  }, [registrando]);
 
   //Eliminar el token
   window.onbeforeunload = () => {
@@ -42,6 +74,19 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
+      <ModalSignIn
+        show={showModal}
+        handleClose={handleClose}
+        setRegistrando={setRegistrando}
+        loader={loader}
+      />
+      {showSuccess ? (
+        <SuccMessage
+          smsg="Te has registrado."
+          msg="Ingresa con los datos ingresados anteriormente."
+          setShow={setShowSuccess}
+        />
+      ) : null}
       {logueado === false ? (
         <section
           className="app-sections"
@@ -54,17 +99,29 @@ function App() {
             height: "100vh",
           }}
         >
-          <div className="log-in">
-            <a href="#" className="link-log-in">
+          <div className="sign-in">
+            <button onClick={handleShow} className="link-sign-in">
               {/*Quedamos en meter el boton del login y luego una ventana modal con un formulario de registro*/}
-              <img src={registro} alt="registro" className="img-log-in"></img>
-              Registrarse
-            </a>
+              <img
+                src={registro}
+                alt="registro-freepik"
+                className="img-sign-in"
+                rel="www.freepik.com"
+              ></img>
+              <span>Registrarse</span>
+            </button>
           </div>
           {showErr ? (
             <ErrMessage
               smsg={showErr.status}
-              msg={showErr.data.error}
+              msg={
+                showErr.config.url ===
+                  "https://user-register-api.herokuapp.com/login" ||
+                showErr.config.url ===
+                  "https://user-register-api.herokuapp.com/register"
+                  ? showErr.data
+                  : showErr.data.error
+              }
               setShow={setShowErr}
             />
           ) : null}

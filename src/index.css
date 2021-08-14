@@ -28,10 +28,31 @@ button.btn {
   box-shadow: 0px 0px 13px -4px rgba(0, 0, 0, 0.79);
   -webkit-box-shadow: 0px 0px 13px -4px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 0px 0px 13px -4px rgba(0, 0, 0, 0.79);
-  font-size: 1.2rem;
+  font-size: 1em;
   width: 100%;
+  font-family: "teko";
 }
 
+button.btn-hero {
+  background-color: #ff9800;
+  color: #3d3d3d;
+  border: 2px solid #b26a00;
+}
+
+button.btn-hero:hover,
+button.btn-hero:active {
+  background-color: #ffac33;
+  color: #fff;
+  border: 2px solid #ff9800;
+  box-shadow: 0 0 0 0.25rem rgb(255 152 0/ 50%) !important;
+}
+
+button.btn-hero:focus {
+  background-color: #ffac33;
+  color: #3d3d3d;
+  border: 2px solid #ff9800;
+  box-shadow: 0 0 0 0.25rem rgb(255 152 0/ 50%) !important;
+}
 .imgCard {
   width: 158px;
   height: 210px;
