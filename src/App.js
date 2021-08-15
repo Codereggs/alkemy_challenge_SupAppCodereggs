@@ -32,9 +32,7 @@ function App() {
       else {
         url = "https://user-register-api.herokuapp.com/login";
       }
-      console.log(logueando);
       const [resData] = await Promise.all([postUser(url, logueando)]);
-      console.log(resData);
       if (!resData) return;
       if (resData.status < 200 || resData.status > 299)
         return [setShowErr(resData)];
@@ -53,7 +51,6 @@ function App() {
       let url = "https://user-register-api.herokuapp.com/register";
       setLoader(true);
       const [resData] = await Promise.all([postRegistration(url, registrando)]);
-      console.log(resData);
       if (!resData) return;
       if (resData.status < 200 || resData.status > 299) {
         setLoader(false);

@@ -59,6 +59,10 @@ export default function SuperHeroSearchCard({
       refCard.current.classList.add("cardElegida");
       refRowDetalles.current.classList.remove("none");
     }
+    if (window.innerWidth < 500) {
+      refDetalles.current.classList.remove("none");
+      refRowDetalles.current.classList.remove("none");
+    }
   });
 
   return (
@@ -153,17 +157,17 @@ export default function SuperHeroSearchCard({
       refBtnDetalles.current.textContent = "Salir";
       refDetalles.current.classList.remove("none");
       refDetalles.current.classList.add("border", "border-primary");
-
       if (elegido) refPoderes.current.classList.add("border", "border-primary");
     } else {
       refCard.current.classList.toggle("modal-on");
       refBtnDetalles.current.textContent = "Detalles";
       refDetalles.current.classList.add("none");
       refDetalles.current.classList.remove("border", "border-primary");
-      if (elegido)
+      if (elegido) {
         refPoderes.current.classList.remove("border", "border-primary");
-
-      if (window.innerWidth < 500) refRowDetalles.current.classList.add("none");
+      } else if (!elegido) {
+        refRowDetalles.current.classList.add("none");
+      }
     }
   }
 }

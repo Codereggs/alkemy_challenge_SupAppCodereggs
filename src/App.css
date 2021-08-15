@@ -191,13 +191,10 @@ label.form-label {
   .carta-heroe {
     width: 8rem;
     font-size: 0.7rem;
-    height: 238px;
+    height: 228px;
     font-family: "Bebas Neue";
   }
 
-  .div-card-heroe {
-    width: 200px;
-  }
   .imgCard {
     width: 79px;
     height: 160px;
@@ -266,5 +263,9 @@ label.form-label {
   div.h5 {
     margin: 0.5rem;
     font-size: calc(1em + 1vw);
+  }
+
+  button.btn-buscar-heroe {
+    width: 40%;
   }
 }

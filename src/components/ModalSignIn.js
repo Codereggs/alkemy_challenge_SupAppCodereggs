@@ -8,13 +8,13 @@ export const ModalSignIn = ({ show, handleClose, setRegistrando, loader }) => {
     const errors = {};
     if (!values.firstName) {
       errors.firstName = "Campo vacío.";
-    } else if (!/^[a-zA-Z ]{2,254}$/gi.test(values.firstName)) {
+    } else if (!/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/gi.test(values.firstName)) {
       errors.firstName = "Solo letras y espacios en blanco.";
     }
 
     if (!values.lastName) {
       errors.lastName = "Campo vacío.";
-    } else if (!/^[a-zA-Z ]{2,254}$/gi.test(values.lastName)) {
+    } else if (!/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/gi.test(values.lastName)) {
       errors.lastName = "Solo letras y espacios en blanco.";
     }
 

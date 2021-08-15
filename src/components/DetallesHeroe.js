@@ -13,7 +13,7 @@ export default function DetallesHeroes({
 }) {
   return (
     <>
-      <Col className=" none" ref={refDetalles}>
+      <Col className="none" ref={refDetalles}>
         <ListGroup variant="flush">
           <ListGroup.Item className="font-bold text-white bg-dark">
             - Detalles -

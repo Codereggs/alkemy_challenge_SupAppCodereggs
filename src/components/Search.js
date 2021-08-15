@@ -23,7 +23,7 @@ const Search = ({ setBD, borrarData }) => {
 
   const formik = useFormik({
     initialValues: {
-      search: " ",
+      search: "",
     },
     validate,
     onSubmit: (values) => {
