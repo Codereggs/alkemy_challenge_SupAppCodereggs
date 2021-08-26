@@ -155,6 +155,12 @@ div.alertsSignIn {
 label.form-label {
   margin-top: 1em;
 }
+
+div.dropdown-menu {
+  min-width: 100%;
+  text-align: center;
+  font-size: 1em;
+}
 /*  MEDIA QUERIES*/
 
 @media screen and (max-width: 540px) {

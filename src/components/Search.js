@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import SuperHeroSearchCard from "./SuperHeroSearchCard";
-import { Alert, Button, Form, Row } from "react-bootstrap";
-import { getData } from "../helpers/useAxios";
+import {
+  Alert,
+  Button,
+  DropdownButton,
+  Form,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
+import { getData, searchHero } from "../helpers/useAxios";
 import { Loader } from "./Loader";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 const Search = ({ setBD, borrarData }) => {
   const [supersEncontrados, setSupersEncontrados] = useState([]);
   const [searching, setSearching] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const validate = (values) => {
     const errors = {};
@@ -48,6 +58,45 @@ const Search = ({ setBD, borrarData }) => {
 
     getAxiosData();
   }, [searching]);
+
+  const HandleChange = (e) => {
+    var characterCount = e.target.value.length;
+
+    if (characterCount < 3) {
+    }
+    setSupersEncontrados([]);
+
+    if (characterCount >= 3) {
+      setLoading(true);
+      (async () => {
+        const respHero = await searchHero(e.target.value);
+        console.log(respHero);
+        setSupersEncontrados(respHero.results);
+        setLoading(false);
+      })();
+    }
+  };
+  const HandleMouseDown = (hero) => {
+    setBD({
+      id: hero.id,
+      imagen: hero.image.url,
+      inteligencia: hero.powerstats.intelligence,
+      fuerza: hero.powerstats.strength,
+      velocidad: hero.powerstats.speed,
+      durabilidad: hero.powerstats.durability,
+      poder: hero.powerstats.power,
+      combate: hero.powerstats.combat,
+      peso: hero.appearance.weight[1],
+      altura: hero.appearance.height[1],
+      nombre: hero.name,
+      nombreCompleto: hero.biography.fullName,
+      alias: hero.biography.aliases,
+      color_de_ojos: hero.appearance.eyeColor,
+      color_de_cabello: hero.appearance.hairColor,
+      lugar_de_trabajo: hero.work.base,
+      tendencia: hero.biography.alignment,
+    });
+  };
   return (
     <>
       <div className="Inicio">
@@ -63,16 +112,46 @@ const Search = ({ setBD, borrarData }) => {
             id="search"
             name="search"
             type="text"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              HandleChange(e);
+            }}
             value={formik.values.search}
+            onBlur={() => setFocused(false)}
+            onFocus={() => setFocused(true)}
           />
+          <DropdownButton
+            id="dropdown-basic-button"
+            title="Selecciona tu héroe"
+            style={{ margin: "auto", width: "100%" }}
+          >
+            <div>
+              {supersEncontrados ===
+              undefined ? null : supersEncontrados.length > 0 ? (
+                supersEncontrados.map((hero) => (
+                  <DropdownItem
+                    key={hero.id}
+                    action
+                    onMouseDown={() => HandleMouseDown(hero)}
+                  >
+                    {hero.name}&nbsp;
+                    <span className="badge badge-pill bg-secondary">
+                      {hero.biography.alignment}
+                    </span>
+                  </DropdownItem>
+                ))
+              ) : (
+                <div>No existen resultados.</div>
+              )}
+            </div>
+          </DropdownButton>
           {formik.errors.search ? (
             <Alert variant="danger" style={{ padding: "0.2rem" }}>
               {formik.errors.search}
             </Alert>
           ) : null}
-          {loading ? (
+          {loading && <Loader />}
+          {/*   {loading ? (
             <Loader />
           ) : (
             <Button
@@ -82,7 +161,7 @@ const Search = ({ setBD, borrarData }) => {
             >
               Buscar
             </Button>
-          )}
+          )} */}
         </Form>
       </div>
       <Row

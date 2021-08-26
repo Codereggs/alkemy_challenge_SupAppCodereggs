@@ -42,3 +42,14 @@ export const postRegistration = async (url, values) => {
     return error;
   }
 };
+
+export const searchHero = async (name) => {
+  try {
+    const response = await axios.get(
+      `https://superheroapi.com/api.php/10159306845489803/search/${name}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
