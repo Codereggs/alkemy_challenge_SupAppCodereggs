@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import SuperHeroSearchCard from "./SuperHeroSearchCard";
-import {
-  Alert,
-  Button,
-  DropdownButton,
-  Form,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Alert, DropdownButton, Form, Row } from "react-bootstrap";
 import { getData, searchHero } from "../helpers/useAxios";
 import { Loader } from "./Loader";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 const Search = ({ setBD, borrarData }) => {
   const [supersEncontrados, setSupersEncontrados] = useState([]);
   const [searching, setSearching] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [focused, setFocused] = useState(false);
 
   const validate = (values) => {
     const errors = {};
@@ -117,8 +108,6 @@ const Search = ({ setBD, borrarData }) => {
               HandleChange(e);
             }}
             value={formik.values.search}
-            onBlur={() => setFocused(false)}
-            onFocus={() => setFocused(true)}
           />
           <DropdownButton
             id="dropdown-basic-button"
